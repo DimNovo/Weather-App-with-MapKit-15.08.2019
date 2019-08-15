@@ -17,9 +17,9 @@ final class NetService: ObservableObject {
     
     func loadWeatherInfo(by city: String) {
         
-        guard baseURL.withQueries(query) != nil else { fatalError("URL isn't correct!")}
+        guard baseURL.withQueries(query) != nil, city != "" else { print("URL isn't correct!"); return}
         
-        query["appid"] = "here YOUR KEY! )))"
+        query["appid"] = "399adde1c318af7f64ec2e0643936a0c"
         query["q"] = city
         
         URLSession.shared.dataTask(with: baseURL.withQueries(query)!) { data,_,error in
@@ -29,7 +29,7 @@ final class NetService: ObservableObject {
             if let weatherInfo = try? JSONDecoder().decode(WeatherData.self, from: data) {
                 DispatchQueue.main.async { self.weather = weatherInfo }
             } else {
-                print(#line, #function, "\(error!.localizedDescription)"); return
+                print(#line, #function, "incorrect user input!"); return
             }
         }.resume()
     }

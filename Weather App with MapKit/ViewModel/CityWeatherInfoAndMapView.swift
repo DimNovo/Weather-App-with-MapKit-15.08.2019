@@ -11,23 +11,19 @@ import SwiftUI
 struct CityWeatherInfoAndMapView: View {
     @ObservedObject var weatherInfo = NetService()
     @State private var city = ""
-    @State private var tappedMap = false
     var body: some View {
         VStack {
-            VStack {
-                MapView(weather: weatherInfo.weather)
-                    .frame(maxHeight: tappedMap ? .infinity : 370)
+            MapView(weather: weatherInfo.weather)
+                    .frame(maxHeight: 400)
                     .cornerRadius(10)
                     .shadow(color: .secondary, radius: 10)
-                    .onTapGesture { withAnimation(.spring()) { self.tappedMap.toggle()}
-                }
-                TextField("Please enter city name", text: $city) { withAnimation(.easeInOut) { self.weatherInfo.loadWeatherInfo(by: self.city)}
-                }
+                TextField("Please enter city name", text: $city) { self.weatherInfo.loadWeatherInfo(by: self.city)}
+                
                 .font(.custom("", size: 30))
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .shadow(color: .secondary, radius: 5)
                 .padding()
-            }
+            Spacer()
             CityWeatherInfo(weather: weatherInfo.weather)
         }
         .padding(5)
