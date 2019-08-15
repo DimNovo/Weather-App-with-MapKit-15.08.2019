@@ -19,7 +19,7 @@ final class NetService: ObservableObject {
         
         guard baseURL.withQueries(query) != nil, city != "" else { print("URL isn't correct!"); return}
         
-        query["appid"] = "399adde1c318af7f64ec2e0643936a0c"
+        query["appid"] = ""
         query["q"] = city
         
         URLSession.shared.dataTask(with: baseURL.withQueries(query)!) { data,_,error in
