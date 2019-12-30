@@ -9,23 +9,24 @@
 import SwiftUI
 
 struct CityWeatherInfoAndMapView: View {
-    @ObservedObject var weatherInfo = NetService()
-    @State private var city = ""
+    @ObservedObject var netService = NetService()
     var body: some View {
         VStack {
-            MapView(weather: weatherInfo.weather)
-                    .frame(maxHeight: 400)
+            List {
+                MapView(weather: netService.weather ?? WeatherData.all())
+                    .frame(width: UIScreen.main.bounds.width / 1.1, height: 400)
                     .cornerRadius(10)
                     .shadow(color: .secondary, radius: 10)
-                TextField("Please enter city name", text: $city) { self.weatherInfo.loadWeatherInfo(by: self.city)}
-                
-                .font(.custom("", size: 30))
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .shadow(color: .secondary, radius: 5)
-                .padding()
-            Spacer()
-            CityWeatherInfo(weather: weatherInfo.weather)
+                TextField("Please enter city name", text: $netService.city)
+                { self.netService.loadWeatherInfo(by: self.netService.city)}
+                    .font(.custom("", size: 30))
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .shadow(color: .secondary, radius: 5)
+                    .padding()
+                Spacer()
+                CityWeatherInfo(weather: netService.weather ?? WeatherData.all())
+            }
+            .padding(5)
         }
-        .padding(5)
     }
 }

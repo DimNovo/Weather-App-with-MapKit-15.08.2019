@@ -29,12 +29,10 @@ struct Wind: Decodable {
 
 extension WeatherData {
     static func all() -> WeatherData {
-        WeatherData(
-            coord:
-            Coordinate(lat: 51.5085, lon: -0.1258),
-                    visibility: 8000,
-                    main: Main(temp: 7, pressure: 1012, humidity: 81),
-                    wind: Wind(speed: 4.6)
+        WeatherData(coord: Coordinate(lat: 24.470901, lon: 39.612236),
+                    visibility: 00,
+                    main: Main(temp: 00, pressure: 00, humidity: 00),
+                    wind: Wind(speed: 0.0)
         )
     }
 }

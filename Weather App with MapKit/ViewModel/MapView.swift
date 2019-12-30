@@ -13,7 +13,7 @@ struct MapView: UIViewRepresentable {
     var weather: WeatherData
     
     func makeUIView(context: Context) -> MKMapView {
-        MKMapView(frame: .null)
+        MKMapView(frame: .zero)
     }
     
     func updateUIView(_ uiView: MKMapView, context: Context) {
@@ -28,7 +28,8 @@ struct MapView: UIViewRepresentable {
 #if DEBUG
 struct MapView_Previews: PreviewProvider {
     static var previews: some View {
-        MapView(weather: WeatherData.all()).colorScheme(.dark)
+        MapView(weather: WeatherData.all())
+            .colorScheme(.dark)
     }
 }
 #endif
